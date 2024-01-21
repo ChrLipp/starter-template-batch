@@ -1,0 +1,66 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+	id 'com.github.ben-manes.versions' version "$GRADLE_VERSIONS_PLUGIN_VERSION"
+	id 'org.springframework.boot' version "$SPRING_BOOT_VERSION"
+	id 'io.spring.dependency-management' version "$SPRING_DEPENDENCY_VERSION"
+	id 'org.jetbrains.kotlin.plugin.spring' version "$KOTLIN_VERSION"
+	id 'org.jetbrains.kotlin.jvm' version "$KOTLIN_VERSION"
+	id "org.jetbrains.kotlin.kapt" version "$KOTLIN_VERSION"
+}
+
+apply from: 'gradle/updates.gradle'
+apply from: 'gradle/version.gradle'
+
+// Dependencies
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+	implementation "io.github.microutils:kotlin-logging-jvm:$LOGGING_VERSION"
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
+	implementation "com.h2database:h2:$H2_DATABASE_VERSION"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.batch:spring-batch-test'
+}
+
+// Variables and constants
+ext {
+	ARGS = [
+		'testmode = false'
+	]
+}
+
+// Java options
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+
+// Kotlin options
+tasks.withType(KotlinCompile).all {
+	kotlinOptions {
+		freeCompilerArgs = ['-Xjsr305=strict']
+		jvmTarget = '17'
+	}
+}
+
+kapt {
+	arguments {
+		arg("project", "${project.group}/${project.name}")
+	}
+}
+
+// Test options
+tasks.withType(Test).all {
+	useJUnitPlatform()
+}
+
+// Spring Boot options
+bootRun {
+	args ARGS
+}
