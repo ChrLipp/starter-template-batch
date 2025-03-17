@@ -1,7 +1,7 @@
 # Kotlin Quick Start
 A template project for a Spring Batch command line application with the following features
 
-- Based on Java 17
+- Based on Java 23
 - written in [Kotlin](https://kotlinlang.org/)
 - powered by [Spring Boot](https://spring.io/projects/spring-boot)
 - and [Spring Batch](https://spring.io/projects/spring-batch/)
