@@ -8,7 +8,7 @@ A template project for a Spring Batch command line application with the followin
 - build with [Gradle](https://gradle.org/)
 
 ## Steps to use the template
-I use this template as a starting point for my command line applications.
+I use this template as a starting point for my Spring Batch command line applications.
 If you want to try it, you have to follow these steps:  
 
 - Create repository on Github with this [link](https://github.com/ChrLipp/starter-template/generate).

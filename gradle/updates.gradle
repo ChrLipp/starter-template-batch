@@ -1,6 +1,6 @@
 // Gradle updates
 wrapper {
-	gradleVersion GRADLE_VERSION
+	gradleVersion = GRADLE_VERSION
 }
 
 // Dependency updates

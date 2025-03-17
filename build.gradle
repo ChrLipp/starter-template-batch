@@ -38,14 +38,16 @@ ext {
 }
 
 // Java options
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(23)
+	}
+}
 
 // Kotlin options
-tasks.withType(KotlinCompile).all {
-	kotlinOptions {
-		freeCompilerArgs = ['-Xjsr305=strict']
-		jvmTarget = '17'
+kotlin {
+	compilerOptions {
+		freeCompilerArgs.addAll '-Xjsr305=strict'
 	}
 }
 
@@ -56,7 +58,7 @@ kapt {
 }
 
 // Test options
-tasks.withType(Test).all {
+tasks.withType(Test).configureEach {
 	useJUnitPlatform()
 }
 
